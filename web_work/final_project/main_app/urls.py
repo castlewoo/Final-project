@@ -7,3 +7,4 @@ urlpatterns = [
     # main/
     path('', views.index, name='index'),
 ]
+######
