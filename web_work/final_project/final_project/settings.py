@@ -119,6 +119,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# 서버의 static 파일 경로
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'  
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
