@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Yummy Bootstrap Template - Index</title>
+  <title>input image</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <!-- Favicons -->
@@ -86,25 +86,30 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero d-flex align-items-center section-bg">
-    <div class="container">
-      <div class="row justify-content-between gy-5">
-        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <h2 data-aos="fade-up">Find Your K-Food<br>Delicious Korean Food</h2>
-          <p data-aos="fade-up" data-aos-delay="100">Look for Korean food that you've been curious about or Korean food that suits your taste.</p>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="input_image" class="btn-book-a-table">Analyze Food</a>
-            <a href="#" class="btn-watch-video d-flex align-items-center"><span>Recommend My Food</span></a>
-          </div>
+    <div class="container" style="max-width: 1300px;">
+
+      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
+        <div class="col-lg-5 text-center">
+          <h2 data-aos="fade-up" style="font-size: 45px;">Please upload a photo of your dish here<br>I'll help you find your food!</h2>
         </div>
-        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+      </div>
+      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
+        <div class="col-lg-5 text-center">
           <img src="{% static '/main/assets/img/tokboggi_3.png' %}" class="img-fluid enlarged-image" alt="" data-aos="zoom-out" data-aos-delay="300">
-          {% comment %} img src="{% static '/main/assets/img/hero-img.png' %}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300"> {% endcomment %}
+        </div>
+      </div>
+      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
+        <div class="col-lg-5 text-center">
+          <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <a href="result" class="btn-book-a-table">Analyze Food</a>
+          </div>
         </div>
       </div>
     </div>
   </section><!-- End Hero Section -->
+  
+  
 
   <main id="main">
 

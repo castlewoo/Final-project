@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Yummy Bootstrap Template - Index</title>
+  <title>input image</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <!-- Favicons -->
@@ -86,25 +86,42 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center section-bg">
-    <div class="container">
-      <div class="row justify-content-between gy-5">
-        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <h2 data-aos="fade-up">Find Your K-Food<br>Delicious Korean Food</h2>
-          <p data-aos="fade-up" data-aos-delay="100">Look for Korean food that you've been curious about or Korean food that suits your taste.</p>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="input_image" class="btn-book-a-table">Analyze Food</a>
-            <a href="#" class="btn-watch-video d-flex align-items-center"><span>Recommend My Food</span></a>
-          </div>
+  <section id="hero" class="hero d-flex align-items-start section-bg">
+    <div class="container" style="max-width: 1300px;">
+  
+      <div class="row justify-content-start gy-5"> <!-- 좌측 정렬 -->
+        <div class="col-lg-5 text-left">
+          <h2 data-aos="fade-up" style="font-size: 70px;">This is</h2>
         </div>
-        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+      </div>
+      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
+        <div class="col-lg-5 text-center position-relative">
           <img src="{% static '/main/assets/img/tokboggi_3.png' %}" class="img-fluid enlarged-image" alt="" data-aos="zoom-out" data-aos-delay="300">
-          {% comment %} img src="{% static '/main/assets/img/hero-img.png' %}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300"> {% endcomment %}
         </div>
       </div>
     </div>
   </section><!-- End Hero Section -->
+
+  <section id="h2" class="hero d-flex align-items-start section-bg">
+    <div class="description-box" data-aos="fade-up" data-aos-delay="50">
+        <p style="font-weight: bold; font-size: 24px;">This dish is ~~~</p>
+      </div>
+  </section><!-- End Hero Section -->
+
+
+  <style>
+    .description-box {
+      position: relative;
+      margin: 0 auto; /* 좌우 여백을 자동으로 조절하여 가로 중앙으로 배치 */
+      width: 70%;
+      padding: 20px;
+      background-color: #fff;
+      border: 2px solid #000;
+    }
+  </style>
+  
+  
+  
 
   <main id="main">
 
