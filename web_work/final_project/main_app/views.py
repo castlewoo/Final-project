@@ -13,3 +13,6 @@ def input_image(request):
 
 def result(request):
     return render(request, 'main_app/result.html')
+
+def login(request):
+    return render(request, 'main_app/signin.html')
