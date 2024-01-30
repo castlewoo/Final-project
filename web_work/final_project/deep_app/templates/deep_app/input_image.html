@@ -3,7 +3,7 @@
 {% block content %}
 
 <script>
-  fuction setThumbnailOne(event){
+  function setThumbnailOne(event){
           let img = document.createElement('img'); // img 태그 동적 생성
           const reader = new FileReader(); // 파일정보 읽어올 객체 변수 생성
           reader.onload = function(event){ // 파일 정보를 읽으면 (사용자가 파일을 선택했으면)
@@ -14,7 +14,13 @@
           reader.readAsDataURL(event.target.files[0]);
           document.querySelector('#imgPreviewOne').appendChild(img); // 동적 생성한 img 태그 html 코드에 부착
       }
-  
+  function submitForm() {
+        document.getElementById("uploadForm").submit();
+    }
+
+  function analyzeFood() {
+        submitForm();  // 버튼 클릭 시 폼 서브밋
+    }
 </script>
 
   <section id="hero" class="hero d-flex align-items-center section-bg">
@@ -27,7 +33,7 @@
       </div>
       <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
         <div class="col-lg-5 text-center">
-          <form method='post' enctype='multipart/form-data' action="{% url "file_upload" %}">
+          <form id="uploadForm" method='post' enctype='multipart/form-data' action="{% url 'file_upload' %}">
             {% csrf_token %}
             이미지 : <input type='file' name='imgFile' id='imgFile' onchange="setThumbnailOne(event)">
         </form><br>
@@ -39,7 +45,7 @@
       <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
         <div class="col-lg-5 text-center">
           <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <a href="result" class="btn-book-a-table">Analyze Food</a>
+            <a href="#" class="btn-book-a-table" onclick="analyzeFood()">Analyze Food</a>
           </div>
         </div>
       </div>

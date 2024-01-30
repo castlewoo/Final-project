@@ -23,7 +23,7 @@ def file_upload(request) :
         # 모든 분석과 관련된 모듈은 deep_app>modules>data_ana.py
         class_name = image_classify(file) # 분류예측 모듈 호출 결과 반환, 이미지 분류 카테고리명을 반환
         img_name = file.name # 클라이언트 전송한 이미지 이름
-
+        print(f"저장한 사진: {img_name}")
         context = { # 클라이언트 페이지에 전달된 dic(이미지 분류명, 이미지 파일명)
             'class_name' : class_name,
             'img_name' : img_name

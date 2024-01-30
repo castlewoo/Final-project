@@ -19,6 +19,7 @@ def image_classify(file):
 
     image_size = 299  # 학습할때 사용한 이미지 사이즈와 동일하게
     img = Image.open(file)  # 이미지 정보 추출
+    print(f"Image opened successfully: {img.size}, Mode: {img.mode}")
     img = img.convert("RGB")  # RGB로 색상값 배치 수정
     img = img.resize((image_size, image_size))  # 이미지 사이즈 학습이미지와 동일하게 수정
     data = np.asarray(img) # array 로 변환
