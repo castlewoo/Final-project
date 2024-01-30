@@ -1,8 +1,25 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+
+<script>
+  fuction setThumbnailOne(event){
+          let img = document.createElement('img'); // img 태그 동적 생성
+          const reader = new FileReader(); // 파일정보 읽어올 객체 변수 생성
+          reader.onload = function(event){ // 파일 정보를 읽으면 (사용자가 파일을 선택했으면)
+              img.setAttribute('src', event.target.result); // 파일경로 추출해서 <img src=속석값으로 전달>
+              img_name = event.target.result
+
+          }
+          reader.readAsDataURL(event.target.files[0]);
+          document.querySelector('#imgPreviewOne').appendChild(img); // 동적 생성한 img 태그 html 코드에 부착
+      }
+  
+</script>
+
   <section id="hero" class="hero d-flex align-items-center section-bg">
     <div class="container" style="max-width: 1300px;">
+
       <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
         <div class="col-lg-5 text-center">
           <h2 data-aos="fade-up" style="font-size: 45px;">Please upload a photo of your dish here<br>I'll help you find your food!</h2>
@@ -10,7 +27,12 @@
       </div>
       <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
         <div class="col-lg-5 text-center">
-          <img src="{% static '/main/assets/img/tokboggi_3.png' %}" class="img-fluid enlarged-image" alt="" data-aos="zoom-out" data-aos-delay="300">
+          <form method='post' enctype='multipart/form-data' action="{% url "result" %}">
+            {% csrf_token %}
+            이미지 : <input type='file' name='imgFile' id='imgFile' onchange="setThumbnailOne(event)">
+        </form><br>
+        
+        <div id="imgPreviewOne"></div>
         </div>
       </div>
       <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
@@ -22,6 +44,12 @@
       </div>
     </div>
   </section><!-- End Hero Section -->
+  
+  
+
+  <main id="main">
+
+  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -71,4 +99,4 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'main/assets/js/main.js' %}"></script>
-{% endblock content %}
+  {% endblock content %}

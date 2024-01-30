@@ -20,5 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')), # 메인 시작화면 주소
-    path('deep/', include('deep_app.urls'))
+    path('', include('deep_app.urls'))
 ]
