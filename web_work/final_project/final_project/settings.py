@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -124,15 +123,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'  
 ]
-
-#### media 설정(image) ####
-
-# media file url
-MEDIA_URL = '/media/'
-
-# media 파일(영상, 이미지, 음성 등 파일)이 저장되는 디렉터리 설정 :
-# BASE_DIR은 프로젝트 최상위 디렉터리
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

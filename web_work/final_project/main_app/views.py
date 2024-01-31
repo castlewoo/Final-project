@@ -8,6 +8,11 @@ from django.http import HttpResponse
 def index(request):
     return render(request, 'main_app/index_food.html')
 
+def input_image(request):
+    return render(request, 'main_app/input_image.html')
+
+def result(request):
+    return render(request, 'main_app/result.html')
+
 def login(request):
     return render(request, 'main_app/signin.html')
-

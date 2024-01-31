@@ -6,6 +6,8 @@ from . import views
 urlpatterns = [
     # main/
     path('', views.index, name='index'),
-    path('login/', views.login, name='login')
+    path('input_image/', views.input_image, name='input_image'),
+    path('input_image/result', views.result, name='result'),
+    path('login/', views.login, name='login'),
 ]
 ######
