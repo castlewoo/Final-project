@@ -12,7 +12,7 @@
   <!-- Favicons -->
   <link href="{% static '/main/assets/img/favicon.png' %}" rel="icon">
   <link href="{% static '/main/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
-
+  
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,6 @@
   <link href="{% static '/main/assets/vendor/aos/aos.css' %}" rel="stylesheet">
   <link href="{% static '/main/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
   <link href="{% static '/main/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
   <!-- Template Main CSS File -->
   <link href="{%static '/main/assets/css/main.css' %}" rel="stylesheet">
   {% block additional_css %}
@@ -58,7 +57,7 @@
             <li><a href="{% url 'main_app:index' %}" class="logo d-flex align-items-center me-auto me-lg-0">Home</a></li>
             <li><a href="{% url 'about:outline' %}">About</a></li>
             <li><a href="input_image">Analyze</a></li>
-            <li><a href="#events">Recommend</a></li>
+            <li><a href="{% url 'deep_app:food_map_form' %}">Search</a></li>
             </ul>
         </nav><!-- .navbar -->
         

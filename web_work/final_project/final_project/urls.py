@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')), # 메인 시작화면 주소
-    path('', include('deep_app.urls')),
+    path('deep_app/', include('deep_app.urls')),
     path('accounts/', include('accounts.urls')),
     path('outline/', include('about.urls')),
     # path('input_image/result', include('deep_app.urls'))

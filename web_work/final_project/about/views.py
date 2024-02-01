@@ -5,6 +5,9 @@ from deep_app.modules.data_anal import image_classify
 from django.core.files.storage import FileSystemStorage
 import os
 import base64
+from collections import OrderedDict
+from .fusioncharts import FusionCharts
+from django.views.generic import View
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -14,6 +17,3 @@ from rest_framework.response import Response
 def outline(request):
     return render(request, 'about/outline.html')
 
-@api_view(['GET'])
-def helloAPI(request) :
-    return Response("hello world! 안녕")
