@@ -24,5 +24,6 @@ urlpatterns = [
     path('', include('main_app.urls')), # 메인 시작화면 주소
     path('', include('deep_app.urls')),
     path('accounts/', include('accounts.urls')),
+    path('outline/', include('about.urls')),
     # path('input_image/result', include('deep_app.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
