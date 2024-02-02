@@ -15,7 +15,9 @@ def get_res_map(food_name): # 호출시 전달된 서울시 자치구에 대한 
 
     for i in food_res_loc_df.index: ## 반복문 이용해서 자치구 공원의 위경도 위치에 마커 추가   
         folium.Marker([food_res_loc_df['위도'][i], 
-                    food_res_loc_df['경도'][i]]).add_to(smap)
+                    food_res_loc_df['경도'][i]],
+                    popup = food_res_loc_df['store_name'][i],
+                    tooltip = food_res_loc_df['store_name'][i]).add_to(smap)
 
     return smap._repr_html_() # html코드를 추출 후 반환, folium 객체가 아닌 html 코드가 반환됨
 
