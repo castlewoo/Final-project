@@ -21,9 +21,14 @@
 
   <section id="h2" class="hero d-flex align-items-start section-bg">
     <div class="description-box" data-aos="fade-up" data-aos-delay="50">
-        <p style="font-weight: bold; font-size: 24px;">This dish is {{class_name}}</p>
+        <p style="font-weight: bold; font-size: 24px;">This dish is {{ class_name }}</p>
+        {% if food_info %}
+          <p>{{ food_info }}</p>
+        {% else %}
+          <p>No information available for this dish.</p>
+        {% endif %}
       </div>
-  </section><!-- End Hero Section -->
+  </section>
   <style>
     .description-box {
       position: relative;
@@ -56,7 +61,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>1위</td>
+          <td>{{res_store_name}}</td>
           <td>음식점 1 위치</td>
           <td>음식점 1 전화번호</td>
           <td>음식점 1 특징</td>
