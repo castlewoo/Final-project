@@ -8,6 +8,19 @@ from keras.models import load_model
 import folium
 import json
 
+def get_res_map(food_name): # 호출시 전달된 서울시 자치구에 대한 지도 시각화 하는 함수
+    seoul_res_loc_df = pd.read_csv('about/data/korea_np.csv', encoding='UTF-8') # 자치구별 공원 현황 및 위경도 데이터 읽어오기
+    food_res_loc_df = seoul_res_loc_df[seoul_res_loc_df['food'] == food_name] # 파라미터로 전달된 자치구 데이터만 추출
+    smap = folium.Map(location=[37.5502, 126.982], zoom_start=11) # 기준 지도 생성
+
+    for i in food_res_loc_df.index: ## 반복문 이용해서 자치구 공원의 위경도 위치에 마커 추가   
+        folium.Marker([food_res_loc_df['위도'][i], 
+                    food_res_loc_df['경도'][i]],
+                    popup = food_res_loc_df['store_name'][i],
+                    tooltip = food_res_loc_df['store_name'][i]).add_to(smap)
+
+    return smap._repr_html_() # html코드를 추출 후 반환, folium 객체가 아닌 html 코드가 반환됨
+
 
 # 한 개의 이미지에 대해 분류 예측 후 분류 카테고리를 반환하는 함수
 def image_classify(file):

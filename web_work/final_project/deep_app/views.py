@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import numpy as np
 import pandas as pd
-from deep_app.modules.data_anal import image_classify
+from deep_app.modules.data_anal import image_classify, get_res_map
 from django.core.files.storage import FileSystemStorage
 import os
 import base64
@@ -93,7 +93,7 @@ def file_upload(request) :
             'class_name' : class_name,
             'img_name' : img_name
         }
-    
+   
     return render(request, 'deep_app/result.html', context)
 
 @api_view(['GET'])
@@ -142,4 +142,15 @@ def foodInfoOneAPI(request, food_name):
     serializer = foodInfoSerializer(food_info, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+def food_map_form(request) :
 
+    seoul_res_loc_df = pd.read_csv('about/data/korea_np.csv', encoding = 'UTF-8')
+    res_food_list = seoul_res_loc_df['food'].unique()
+    res_food_list = sorted(res_food_list)
+    return render(request, 'deep_app/food_map_form.html', {'res_food_list' : res_food_list})
+
+def show_res_map(request) :
+    if request.method == 'POST' :
+        food_name = request.POST['food_name']
+        smap = get_res_map(food_name)
+    return render(request, 'deep_app/res_map_result.html', {'smap' : smap})

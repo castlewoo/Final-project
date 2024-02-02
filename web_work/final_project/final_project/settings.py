@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_app',
     'deep_app',
-    'rest_framework',
+    'accounts',
+    'about',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -88,6 +90,10 @@ WSGI_APPLICATION = 'final_project.wsgi.application'
 DATABASES = db_settings.DATABASES
 SECRET_KEY = db_settings.SECRET_KEY
 
+# import db_settings
+
+# DATABASES = db_settings.DATABASES
+# SECRET_KEY = db_settings.SECRET_KEY
 
 
 
@@ -129,7 +135,7 @@ STATIC_URL = 'static/'
 
 # 서버의 static 파일 경로
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'  
+    BASE_DIR / 'static',  
 ]
 
 #### media 설정(image) ####
