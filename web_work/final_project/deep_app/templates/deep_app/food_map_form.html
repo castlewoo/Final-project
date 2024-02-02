@@ -2,7 +2,10 @@
 {% load static %}
 {% block content %} 
 
-<hr>
+
+<section>
+<div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
+<div class="col-lg-5 text-center">
 <h2>음식점 검색</h2>
 <form id='guSearchForm' method="post">
     {% csrf_token %}
@@ -15,6 +18,9 @@
         
     <input type="submit" value="검색">
 </form><br><br>
+</div>
+</div>
+</section>
 
 {% comment %} 검색 결과 출력할 div {% endcomment %}
 <div id="searchResultBox"></div>

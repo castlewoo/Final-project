@@ -58,7 +58,7 @@
             <ul>
             <li><a href="{% url 'main_app:index' %}" class="logo d-flex align-items-center me-auto me-lg-0">Home</a></li>
             <li><a href="{% url 'about:outline' %}">About</a></li>
-            <li><a href="input_image">Analyze</a></li>
+            <li><a href="{% url 'deep_app:input_image' %}">Analyze</a></li>
             <li><a href="{% url 'deep_app:food_map_form' %}">Search</a></li>
             </ul>
         </nav><!-- .navbar -->
@@ -80,5 +80,7 @@
     {% block content %}
     
     {% endblock content %}
+
+    
 </body>
 </html>
