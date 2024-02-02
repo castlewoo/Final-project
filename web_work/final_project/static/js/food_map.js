@@ -9,10 +9,11 @@ $(document).ready(function(){
 
         $.ajax({
             type:"post",
-            url:"http://127.0.0.1:8000/deep_app/food_map_form/show_res_map/",
+            url:"http://127.0.0.1:8000/deep_app/show_res_map/",
             data:formData,
             datatype:'json',
             success:function(result){
+                console.log(result)
                 $('#searchResultBox').html(result) // #searchResultBox id 태그내에 html 코드를 삽입하는 함수(코드는 result에서 반환받음)
             },
             error:function(){

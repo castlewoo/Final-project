@@ -9,7 +9,7 @@ import folium
 import json
 
 def get_res_map(food_name): # 호출시 전달된 서울시 자치구에 대한 지도 시각화 하는 함수
-    seoul_res_loc_df = pd.read_csv('about/data/korea_nap.csv', encoding='UTF-8') # 자치구별 공원 현황 및 위경도 데이터 읽어오기
+    seoul_res_loc_df = pd.read_csv('about/data/korea_np.csv', encoding='UTF-8') # 자치구별 공원 현황 및 위경도 데이터 읽어오기
     food_res_loc_df = seoul_res_loc_df[seoul_res_loc_df['food'] == food_name] # 파라미터로 전달된 자치구 데이터만 추출
     smap = folium.Map(location=[37.5502, 126.982], zoom_start=11) # 기준 지도 생성
 
