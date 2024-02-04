@@ -2,108 +2,74 @@
 {% load static %}
 {% block content %}
 
-<script>
-  function setThumbnailOne(event){
-          let img = document.createElement('img'); // img 태그 동적 생성
-          const reader = new FileReader(); // 파일정보 읽어올 객체 변수 생성
-          reader.onload = function(event){ // 파일 정보를 읽으면 (사용자가 파일을 선택했으면)
-              img.setAttribute('src', event.target.result); // 파일경로 추출해서 <img src=속석값으로 전달>
-              img_name = event.target.result
+  <script>
+    function setThumbnailOne(event){
+      const imgBox = document.querySelector('.image-box');
+      let img = document.createElement('img'); // img 태그 동적 생성
+      const reader = new FileReader(); // 파일정보 읽어올 객체 변수 생성
 
-          }
-          reader.readAsDataURL(event.target.files[0]);
-          document.querySelector('#imgPreviewOne').appendChild(img); // 동적 생성한 img 태그 html 코드에 부착
-      }
-  function submitForm() {
-        document.getElementById("uploadForm").submit();
+      reader.onload = function(event){ // 파일 정보를 읽으면 (사용자가 파일을 선택했으면)
+        img.setAttribute('src', event.target.result); // 파일경로 추출해서 <img src=속석값으로 전달>
+
+        // 이미지 박스 업데이트
+        imgBox.innerHTML = ''; // 이미지 박스 초기화
+        imgBox.appendChild(img); // 동적 생성한 img 태그를 이미지 박스에 추가
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
     }
 
-  function analyzeFood() {
-        submitForm();  // 버튼클릭 시 폼 서브밋
+    function submitForm() {
+      document.getElementById("uploadForm").submit();
     }
-</script>
 
-  <section id="hero" class="hero d-flex align-items-center section-bg">
-    <div class="container" style="max-width: 1300px;">
+    function analyzeFood() {
+      submitForm();  // 버튼클릭 시 폼 서브밋
+    }
+  </script>
 
-      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
-        <div class="col-lg-5 text-center">
-          <h2 data-aos="fade-up" style="font-size: 45px;">Please upload a photo of your dish here<br>We'll help you find your food!</h2>
+  <main id='main'>
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Classify Food Image</h2>
+          <ol>
+            <li><a href="{% url 'main_app:index' %}">Home</a></li>
+            <li>Analyze</li>
+          </ol>
         </div>
+
       </div>
-      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
-        <div class="col-lg-5 text-center">
-          <form id="uploadForm" method='post' enctype='multipart/form-data' action="{% url 'file_upload' %}">
-            {% csrf_token %}
-            이미지 : <input type='file' name='imgFile' id='imgFile' onchange="setThumbnailOne(event)">
-        </form><br>
-        
-        <div id="imgPreviewOne"></div>
-        
+    </div><!-- End Breadcrumbs -->
+
+    <section class='input-page'>
+      <div class='container' data-aos='fade-up'>
+        <div class="section-header"> 
+          <h2>Classify Food</h2>
+          <p>Please <span>upload</span> a photo of your dish here<br>We'll help you <span>find your food!</span></p>
         </div>
-      </div>
-      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
-        <div class="col-lg-5 text-center">
-          <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <a href="#" class="btn-book-a-table" onclick="analyzeFood()">Analyze Food</a>
+
+        <div class="row justify-content-center"> <!-- 중앙 정렬 -->
+          <div class="text-center">
+            <div class="image-box" id="imgPreviewOne">
+              <!-- 이미지 미리보기가 여기에 나타납니다 -->
+              <button type="button" onclick="document.getElementById('imgFile').click()"><span>Click</span> to put a <span>picture of your food</span></button>
+            </div>
+            <form id="uploadForm" method='post' enctype='multipart/form-data' action="{% url 'file_upload' %}">
+              {% csrf_token %}
+              <input type='file' name='imgFile' id='imgFile' style="display: none;" onchange="setThumbnailOne(event)">
+            </form>
+
+            {% comment %} <div id="imgPreviewOne"></div> {% endcomment %}
           </div>
         </div>
-      </div>
-    </div>
-  </section><!-- End Hero Section -->
-  
-  
 
-  <main id="main">
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <div>
-            <h4>developer</h4>
-            <p>
-              Kim Sungwoo <br>
-              Kim Myeongjun <br>
-              Seo Juewon <br>
-            </p>
-          </div>
+        <div class="d-flex justify-content-center" data-aos="fade-up">
+          <a href="#" class="btn-book-a-table" onclick="analyzeFood()">Analyze Food</a>
         </div>
       </div>
-    </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer><!-- End Footer -->
-  <!-- End Footer -->
-
-  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="{% static 'main/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'main/assets/vendor/aos/aos.js' %}"></script>
-  <script src="{% static 'main/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-  <script src="{% static 'main/assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
-  <script src="{% static 'main/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-  <script src="{% static 'main/assets/vendor/php-email-form/validate.js' %}"></script>
-
-  <!-- Template Main JS File -->
-  <script src="{% static 'main/assets/js/main.js' %}"></script>
-  {% endblock content %}
+    </section>
+  </main>
+{% endblock content %}

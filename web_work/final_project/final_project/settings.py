@@ -82,9 +82,18 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'datamart' : {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'etlmysqlDM',
+        'USER': 'root',
+        'PASSWORD': 'ghj12309298',
+        'HOST': 'localhost',  # MySQL 호스트 주소
+        'PORT': '3306',       # MySQL 포트
+    },
 }
 
+DATABASE_ROUTERS = ['deep_app.deepRouter.DeepRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
