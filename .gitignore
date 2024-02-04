@@ -1,4 +1,5 @@
 # pyc 파일 무시
-*.pyc
-*.h5
-*.sqlite3
+/web_work/final_project/db.sqlite3
+/web_work/final_project/deep_app/*.h5
+/web_work/final_project/*pyc
+/web_work/final_project/**/*.pyc
