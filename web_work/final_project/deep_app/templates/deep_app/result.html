@@ -60,41 +60,15 @@
         </tr>
       </thead>
       <tbody>
+        {% for row in res_info %}
         <tr>
-          <td>{{res_store_name}}</td>
-          <td>음식점 1 위치</td>
-          <td>음식점 1 전화번호</td>
-          <td>음식점 1 특징</td>
-          <td>음식점 1 방문자 리뷰</td>
+          <td>{{ row.1 }}</td>
+          <td>{{ row.2 }}</td>
+          <td>{{ row.3 }}</td>
+          <td>{{ row.6 }}</td>
+          <td>{{ row.6 }}</td>
         </tr>
-        <tr>
-          <td>2위</td>
-          <td>음식점 2 위치</td>
-          <td>음식점 2 전화번호</td>
-          <td>음식점 2 특징</td>
-          <td>음식점 2 방문자 리뷰</td>
-        </tr>
-        <tr>
-          <td>3위</td>
-          <td>음식점 3 위치</td>
-          <td>음식점 3 전화번호</td>
-          <td>음식점 3 특징</td>
-          <td>음식점 3 방문자 리뷰</td>
-        </tr>
-        <tr>
-          <td>4위</td>
-          <td>음식점 4 위치</td>
-          <td>음식점 4 전화번호</td>
-          <td>음식점 4 특징</td>
-          <td>음식점 4 방문자 리뷰</td>
-        </tr>
-        <tr>
-          <td>5위</td>
-          <td>음식점 5 위치</td>
-          <td>음식점 5 전화번호</td>
-          <td>음식점 5 특징</td>
-          <td>음식점 5 방문자 리뷰</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
 
@@ -122,57 +96,17 @@
   </div><!-- End Google Maps -->
 
   <div class="row gy-4">
-
+    {% for row in res_info %}
     <div class="col-md-6">
       <div class="info-item  d-flex align-items-center">
         <i class="icon bi bi-map flex-shrink-0"></i>
         <div>
-          <h3>Store name 1</h3>
-          <p>주소</p>
+          <h3>{{ row.1 }}</h3>
+          <p>{{ row.2 }}</p>
         </div>
       </div>
     </div><!-- End Info Item -->
-
-    <div class="col-md-6">
-      <div class="info-item  d-flex align-items-center">
-        <i class="icon bi bi-map flex-shrink-0"></i>
-        <div>
-          <h3>Store name 2</h3>
-          <p>주소</p>
-        </div>
-      </div>
-    </div><!-- End Info Item -->
-
-    <div class="col-md-6">
-      <div class="info-item  d-flex align-items-center">
-        <i class="icon bi bi-map flex-shrink-0"></i>
-        <div>
-          <h3>Store name 3</h3>
-          <p>주소</p>
-        </div>
-      </div>
-    </div><!-- End Info Item -->
-
-    <div class="col-md-6">
-      <div class="info-item  d-flex align-items-center">
-        <i class="icon bi bi-map flex-shrink-0"></i>
-        <div>
-          <h3>Store name 4</h3>
-          <p>주소</p>
-        </div>
-      </div>
-    </div><!-- End Info Item -->
-
-    <div class="col-md-6">
-      <div class="info-item  d-flex align-items-center">
-        <i class="icon bi bi-map flex-shrink-0"></i>
-        <div>
-          <h3>Store name 5</h3>
-          <p>주소</p>
-        </div>
-      </div>
-    </div><!-- End Info Item -->
-
+    {% endfor %}
   </div>
 </div>
 </section>

@@ -28,16 +28,20 @@ def get_food_info(food_name):
 # 디비에서 음식점정보 가져오기 위한 함수
 def get_res_info(food_name):
     try:
-        
-        res_info = RestaurantInfo.objects.filter(food=food_name).first()
+        res_info = RestaurantInfo.objects.filter(food=food_name)[:5]
         res_info_list = []
-        res_info_list.append(res_info.food)
-        res_info_list.append(res_info.store_name)
-        res_info_list.append(res_info.addr)
-        res_info_list.append(res_info.tel)
-        res_info_list.append(res_info.x좌표)
-        res_info_list.append(res_info.y좌표)
-        res_info_list.append(res_info.id)
+        for info in res_info:
+            row = [
+                info.food,
+                info.store_name,
+                info.addr,
+                info.tel,
+                info.x좌표,
+                info.y좌표,
+                info.id,
+            ]
+            res_info_list.append(row)
+        print(res_info_list)
         return res_info_list
 
     except RestaurantInfo.DoesNotExist:
@@ -58,20 +62,11 @@ def foodInfoOneAPI_Return_INFO(request):
     # 데이터베이스에서 정보를 가져옴
     food_info = get_food_info(class_name)
     res_info = get_res_info(class_name)
-    res_info[0]
-    print(res_info)
     context = { # 클라이언트 페이지에 전달된 dic(이미지 분류명, 이미지 파일명)
             'class_name' : class_name,
             'food_info' : food_info,
             'img_name' : img_name,
-            'res_food' : res_info[0],
-            'res_store_name' : res_info[1],
-            'res_addr' : res_info[2],
-            'res_tel' : res_info[3],
-            'res_xPoint' : res_info[4],
-            'res_yPoint' : res_info[5],
-            'res_id' : res_info[6],
-            
+            'res_info' : res_info,
     }
 
 
@@ -80,6 +75,7 @@ def foodInfoOneAPI_Return_INFO(request):
     return render(request, 'deep_app/result.html', context)
 
 def file_upload(request) :
+    print("파일업로드")
     if request.method == "POST" :
         file = request.FILES.get('imgFile') # 클라이언트 전송한 파일 추출하는 코드
         fs = FileSystemStorage() # 파일 저장 객체 생성

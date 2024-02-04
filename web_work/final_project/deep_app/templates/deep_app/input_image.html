@@ -4,6 +4,7 @@
 
 <script>
   function setThumbnailOne(event){
+    console.log('서브밋');
           let img = document.createElement('img'); // img 태그 동적 생성
           const reader = new FileReader(); // 파일정보 읽어올 객체 변수 생성
           reader.onload = function(event){ // 파일 정보를 읽으면 (사용자가 파일을 선택했으면)
@@ -15,10 +16,12 @@
           document.querySelector('#imgPreviewOne').appendChild(img); // 동적 생성한 img 태그 html 코드에 부착
       }
   function submitForm() {
+    console.log('서브밋');
         document.getElementById("uploadForm").submit();
     }
 
   function analyzeFood() {
+    console.log('아날');
         submitForm();  // 버튼클릭 시 폼 서브밋
     }
 </script>
@@ -45,7 +48,7 @@
       <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
         <div class="col-lg-5 text-center">
           <div class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <a href="result" class="btn-book-a-table" onclick="analyzeFood()">Analyze Food</a>
+            <a href="#" class="btn-book-a-table" onclick="analyzeFood()">Analyze Food</a>
           </div>
         </div>
       </div>
