@@ -7,7 +7,8 @@ import numpy as np
 from keras.models import load_model
 import folium
 import json
-
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 # 한 개의 이미지에 대해 분류 예측 후 분류 카테고리를 반환하는 함수
 def image_classify(file):

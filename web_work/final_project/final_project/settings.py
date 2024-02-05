@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'main_app',
     'deep_app',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -75,14 +77,25 @@ WSGI_APPLICATION = 'final_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+import pymysql
+pymysql.version_info = (1, 4, 6, 'final', 0)  # 버전은 설치된 버전에 맞게 조절
+pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'datamart' : {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'etlmysqlDM',
+        'USER': 'bigDM',
+        'PASSWORD': 'bigDM1234@',
+        'HOST': 'localhost',  # MySQL 호스트 주소
+        'PORT': '3306',       # MySQL 포트
+    },
 }
 
+DATABASE_ROUTERS = ['deep_app.deepRouter.DeepRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
