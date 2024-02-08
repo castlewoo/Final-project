@@ -57,12 +57,10 @@
               <!-- 이미지 미리보기가 여기에 나타납니다 -->
               <button type="button" onclick="document.getElementById('imgFile').click()"><span>Click</span> to put a <span>picture of your food</span></button>
             </div>
-            <form id="uploadForm" method='post' enctype='multipart/form-data' action="{% url 'file_upload' %}">
+            <form id="uploadForm" method='post' enctype='multipart/form-data' action="{% url 'deep_app:file_upload' %}">
               {% csrf_token %}
               <input type='file' name='imgFile' id='imgFile' style="display: none;" onchange="setThumbnailOne(event)">
             </form>
-
-            {% comment %} <div id="imgPreviewOne"></div> {% endcomment %}
           </div>
         </div>
 

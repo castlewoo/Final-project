@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+
+    <main id='main'>
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs">
+            <div class="container">
+    
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Recommend Restaurant</h2>
+                <ol>
+                <li><a href="{% url 'main_app:index' %}">Home</a></li>
+                <li>Recommend</li>
+                </ol>
+            </div>
+    
+            </div>
+        </div><!-- End Breadcrumbs -->
+        
+        <section class='recommend-page'>
+            <div class='container' data-aos='fade-up'>
+                <div class='section-header'>
+                    <h2>Find Restaurant</h2>
+                    <p>Choose the <span>K-food</span> you want<br>and check the <span>location of the restaurant!</span></p>
+                </div>
+
+                <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
+                    <div class="text-center">
+                        <h2>Search Restaurant</h2>
+                        <form id='foodSearchForm' method="post">
+                            {% csrf_token %}
+                            <select name="food_name" id="food_name">
+                                <option value="">Select Food</option>
+                                {% for food_name in food_name_list %}
+                                <option value="{{food_name}}"> {{food_name}} </option>
+                                {% endfor %}
+                            </select>
+                                
+                            <input type="submit" value="검색">
+
+                            <div id="searchResultBox" style="width: 90%; margin: 0 auto; margin-top: 40px;"></div>
+                        </form>
+                    </div>
+                </div>
+            </div> 
+        </section>
+    </main>
+{% endblock content %}
+
