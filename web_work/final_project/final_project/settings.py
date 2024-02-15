@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&o_j5k6@dq$ve5lt$kw-da^!6%jqzdehuc64o1pmy#8qt*h#c4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,7 +77,9 @@ WSGI_APPLICATION = 'final_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+import pymysql
+pymysql.version_info = (1, 4, 6, 'final', 0)  # 버전은 설치된 버전에 맞게 조절
+pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,8 +88,8 @@ DATABASES = {
     'datamart' : {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'etlmysqlDM',
-        'USER': 'root',
-        'PASSWORD': 'ghj12309298',
+        'USER': 'bigDM',
+        'PASSWORD': 'bigDM1234@',
         'HOST': 'localhost',  # MySQL 호스트 주소
         'PORT': '3306',       # MySQL 포트
     },

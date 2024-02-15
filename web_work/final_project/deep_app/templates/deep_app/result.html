@@ -1,98 +1,222 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
-  <section id="hero" class="hero d-flex align-items-start section-bg">
-    <div class="container" style="max-width: 1300px;">
-  
-      <div class="row justify-content-start gy-5"> <!-- 좌측 정렬 -->
-        <div class="col-lg-5 text-left">
-          <h2 data-aos="fade-up" style="font-size: 70px;">This is</h2>
-        </div>
-      </div>
-      <div class="row justify-content-center gy-5"> <!-- 중앙 정렬 -->
-        <div class="col-lg-5 text-center position-relative">
-          <img id = "predict_img" src="/media/{{ img_name }}">
-        </div>
-      </div>
-    </div>
-  </section><!-- End Hero Section -->
-
-  <section id="h2" class="hero d-flex align-items-start section-bg">
-    <div class="description-box" data-aos="fade-up" data-aos-delay="50">
-        <p style="font-weight: bold; font-size: 24px;">This dish is {{ class_name }}</p>
-        <p style="font-weight: bold; font-size: 18px;">Info : {{ info }}</p>
-        <p style="font-weight: bold; font-size: 18px;">Ingredient : {{ ingredient }}</p>
-        <p style="font-weight: bold; font-size: 18px;">Taboo : {{ taboo_ingredient }}</p>
-    </div>
-  </section><!-- End Hero Section -->
-  <style>
-    .description-box {
-      position: relative;
-      margin: 0 auto; /* 좌우 여백을 자동으로 조절하여 가로 중앙으로 배치 */
-      width: 70%;
-      padding: 20px;
-      background-color: #fff;
-      border: 2px solid #000;
-    }
-  </style>
-  
-<main id="main">
-<!-- ======= Start Rank Section ======= -->
-<section id="events" class="events">
-  <div class="container-fluid" data-aos="fade-up">
-
-    <div class="section-header">
-      <h2>Ranking</h2>
-      <p>This is the <span> top 5</span> ranking for this food. </p>
-    </div>
-    <table class="table table-striped custom-table">
-      <thead>
-        <tr>
-          <th>음식점 이름</th>
-          <th>위치</th>
-          <th>전화번호</th>
-          <th>음식점 특징</th>
-          <th>방문자 리뷰</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for rank5_info in rank5_info_list %}
-        <tr>
-          <td>{{ rank5_info.store_name }}</td>
-          <td>{{ rank5_info.addr }}</td>
-          <td>{{ rank5_info.tel }}</td>
-          <td>음식점 1 특징</td>
-          <td>{{ rank5_info.re_visitor }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</section>
 <style>
-  .custom-table {
-    margin-left: 40px; /* 원하는 여백 크기로 조절 */
-    margin-right: 40px;
+  .chart-container {
+      display: none; /* 초기에는 차트를 숨김 */
   }
 </style>
-<!-- End Rank Section -->
 
-<!-- ======= Start Map Section ======= -->
-<section id="contact" class="contact">
-<div class="container" data-aos="fade-up">
+  <main id='main'>
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
 
-  <div class="section-header">
-    <h2>Map</h2>
-    <p>Are you planning to visit this place?  <span>  We'll show you the map.</span></p>
-  </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Classify Food Image</h2>
+          <ol>
+            <li><a href="{% url 'main_app:index' %}">Home</a></li>
+            <li>Analyze</li>
+          </ol>
+        </div>
 
-  <div class="mb-3">
-    <div id='map' style='border: 0; width: 100%; height: 450px;'></div>
-    {% comment %} <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> {% endcomment %}
-  </div><!-- End Google Maps -->
-</div>
+      </div>
+    </div><!-- End Breadcrumbs -->
 
+    <section class="classify-image">
+      <div class="container" data-aos="fade-up">
+        <div class='section-header'>
+          <h2>Classify Food</h2>
+          <p>Let's <span>check out</span> the food you're <span>curious about</span></p>
+        </div>
+    
+        <div class="row justify-content-center"> <!-- 중앙 정렬 -->
+          <div class="text-center position-relative">
+            <img id = "predict_img" src="/media/{{ img_name }}">
+            <p class="food-name">Food Name: {{ class_name }}</p> 
+          </div>
+
+          {% if not request.user.is_authenticated %}
+          <div class='text-center position-relative'>
+            <a href="{% url 'accounts:signup_signin' %}" class='btn-book-a-table'>
+              Do you know more information ? <br> Sign In Please 
+            </a> 
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </section><!-- End Hero Section -->
+
+    {% if request.user.is_authenticated %}
+    <section class="food-info section-bg">
+      <div class='container' data-aos='fade-up'>
+        <div class='section-header'>
+          <h2>Food Info</h2>
+          <p><span>Check</span> your <span>food information!</span></p>
+        </div>
+      </div>
+      
+      <div class="wrap" data-aos="fade-up">
+        <div class="top_box">
+          <h3>INFO {{ class_name }}</h3>
+          <p> {{ info }}</p>
+        </div>
+        <div class="bottom_box">
+          <div class="bottom_box-left">
+            <h3>INGREDIENT</h3>
+            <p>{{ ingredient }}</p>
+          </div>
+          <div class="bottom_box-right">
+            <h3>TABOO_INGREDIENT</h3>
+            <p>{{ taboo_ingredient }}<br><br></p>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Hero Section -->
+
+    <!-- ======= Start Rank Section ======= -->
+    <section class="store-rank">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2>Ranking</h2>
+          <p>This is the <span> top 5</span> ranking for this food. </p>
+        </div>
+      </div>
+
+      <div class="table-wrap" data-aos="fade-up">
+        <div class="table-list--category">
+          <div class="table-list table-list--rank">순&nbsp;위</div>
+          <div class="table-list table-list--name">이&nbsp;름</div>
+          <div class="table-list table-list--location">위&nbsp;치</div>
+          <div class="table-list table-list--tel">번&nbsp;호</div>
+          <div class="table-list table-list--distinct">특&nbsp;징</div>
+          <div class="table-list table-list--more">더&nbsp;보&nbsp;기</div>
+          <div class="table-list table-list--recommend">추천&nbsp;수</div>
+          <div class="table-list table-list--review">리&nbsp;&nbsp;뷰</div>
+        </div>
+
+        {% for rank5_info in rank5_info_list %}
+        <div class="table-list--content">
+          <div class="table-list table-list--rank">{{ rank5_info.rank }}위</div>
+          <div class="table-list table-list--name"><p>{{ rank5_info.store_name }}</p></div>
+          <div class="table-list table-list--location">{{ rank5_info.addr }}</div>
+          <div class="table-list table-list--tel">{{ rank5_info.tel }}</div>
+          <div class="table-list table-list--distinct">
+            {% for rank5 in rank5_info.code_texts|slice:":3" %}
+            <p>{{ rank5 }}</p>
+            {% endfor %}
+          </div>
+          <button class="view-more-btn" onclick="toggleChart('{{ rank5_info.rank }}', {{ rank5_info.code_texts|safe }}, {{ rank5_info.cnt_values|safe }})">더보기</button>
+          <div class="chart-container" id="chart-container-{{ rank5_info.rank }}">
+              <canvas id="chart-{{ rank5_info.rank }}" style="max-width: 400px;"></canvas>
+          </div>
+          <div class="table-list table-list--recommend">{{ rank5_info.cnt_tot }}</div>
+          <div class="table-list table-list--review">{{ rank5_info.re_visitor }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- ======= Start Map Section ======= -->
+    <section id='contact' class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Map</h2>
+          <p>Are you planning to visit this place?<span>  We'll show you the map.</span></p>
+        </div>
+
+        <div class="mb-3">
+          <div id='map' style='border: 0; width: 100%; height: 450px;'></div>   
+        </div>
+
+        <div class="row gy-4">
+          {% for row in rank5_info_list %}
+          <div class="col-md-6">
+            <div class="info-item d-flex align-items-center">
+              <i class="icon bi bi-map flex-shrink-0"></i>
+              <div>
+                  <h3>{{ row.store_name }}</h3>
+                  <p>{{ row.addr }}</p>
+              </div>
+            </div>
+          </div><!-- End Info Item -->
+          {% endfor %}
+    </section>
+    {% endif %}
+  </main>
+
+  <script>
+    var chartShown = {};
+  
+    function toggleChart(rank, labels, data) {
+        var chartContainerId = 'chart-container-' + rank;
+        var chartContainer = document.getElementById(chartContainerId);
+  
+        var buttonId = 'view-more-btn-' + rank;
+        var button = document.getElementById(buttonId);
+  
+        if (!chartShown[rank]) {
+            // 차트가 보이지 않는 상태일 때
+            chartContainer.style.display = 'block'; // 차트 표시
+            renderChart(rank, labels, data); // 차트 렌더링 함수 호출
+            chartShown[rank] = true; // 차트가 보이는 상태로 변경
+            button.style.display = 'none';
+        } else {
+            // 차트가 보이는 상태일 때
+            chartContainer.style.display = 'none'; // 차트 숨김
+            chartShown[rank] = false; // 차트가 보이지 않는 상태로 변경
+        }
+    }
+  
+    function renderChart(rank, labels, data) {
+        // 차트 렌더링 코드 작성
+        var ctx = document.getElementById('chart-' + rank).getContext('2d');
+        var chartData = {
+            labels: labels,
+            datasets: [{
+                data: data, // 실제 데이터로 변경
+                backgroundColor: [
+                  '#FF6384', // 빨강
+                  '#36A2EB', // 파랑
+                  '#FFCE56', // 노랑
+                  '#4CAF50', // 초록
+                  '#FF8C00'  // 주황
+                ]
+            }]
+        };
+        var options = {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+              datalabels: {
+                  anchor: 'end',
+                  align: 'start',
+                  display: 'auto',
+                  font: {
+                      weight: 'bold'
+                  },
+                  formatter: function(value, context) {
+                      return value; // 데이터 값 표시
+                  }
+              }
+          }
+        };
+        new Chart(ctx, {
+            type: 'pie',
+            data: chartData,
+            options: options
+        });
+  
+        // 새로운 row 추가
+        var newRow = document.createElement('div');
+        newRow.className = 'table-list--content';
+        newRow.innerHTML = '<p>새로운 row</p>';
+        document.getElementById('new-row-' + rank).appendChild(newRow);
+    }
+  </script>
+
+  <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=my70djses9"></script>
   <script>
     var map = null;
 
@@ -141,9 +265,6 @@
     }
 
     initMap();
-</script>
-</section>
-
+  </script>
 <!-- ======= End Map Section ======= -->
-</main><!-- End #main -->
 {% endblock content %}

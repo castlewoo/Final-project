@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css");
 /**
 * Template Name: Yummy
 * Updated: Jan 09 2024 with Bootstrap v5.3.2
@@ -131,6 +132,202 @@ section {
   margin-top: 30px;
 }
 
+.classify-image .food-name {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.classify-image .btn-book-a-table {
+  display: inline-block;
+  font-size: 18px;
+  color: #fff;
+  background: var(--color-primary);
+  padding: 8px 20px;
+  border-radius: 50px;
+  transition: 0.3s;
+  text-decoration: none; /* 추가: 기본 링크 텍스트 밑줄 제거 */
+}
+
+.classify-image .btn-book-a-table:hover {
+  color: #fff;
+  background: rgba(206, 18, 18, 0.8);
+}
+
+.food-info .wrap{
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+  background-color:#fff;
+  width: 80%; 
+  margin: auto;
+}
+
+.food-info .wrap .top_box {
+  display: flex; 
+  flex-direction:column; 
+  justify-content:center; 
+  align-items:center; 
+  width:100%; 
+  border:1px solid #ddd; 
+  padding:60px; 
+  transition:all 0.6s;
+}
+
+.food-info .wrap .top_box:hover {
+  background-color: #ddd;
+}
+
+.food-info .wrap .top_box h3 {
+  margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  font-family:'Pretendard', sans-serif;
+}
+
+.food-info .wrap .top_box p {
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  font-family:'Pretendard', sans-serif;
+}
+
+.food-info .wrap .bottom_box {
+  display: flex;
+}
+
+.food-info .wrap .bottom_box .bottom_box-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 60px;
+  border: 1px solid #ddd;
+  border-top: none;
+  transition: all 0.6s;
+}
+
+.food-info .wrap .bottom_box .bottom_box-left:hover {
+  background-color: #ddd;
+}
+
+.food-info .wrap .bottom_box .bottom_box-left h3 {
+  margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  font-family:'Pretendard', sans-serif;
+}
+
+.food-info .wrap .bottom_box .bottom_box-left p {
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  font-family:'Pretendard', sans-serif;
+}
+
+.food-info .wrap .bottom_box .bottom_box-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 60px;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-left: none;
+  transition: all 0.6s;
+}
+
+.food-info .wrap .bottom_box .bottom_box-right:hover {
+  background-color: #ddd;
+}
+
+.food-info .wrap .bottom_box .bottom_box-right h3 {
+  margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  font-family:'Pretendard', sans-serif;
+}
+
+.food-info .wrap .bottom_box .bottom_box-right p {
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  font-family:'Pretendard', sans-serif;
+}
+
+/*--------------------------------------------------------------
+# Table
+--------------------------------------------------------------*/
+
+.store-rank .table-wrap {
+  width: 80%;
+  margin: auto;
+  border-top: 2px solid #121212;
+}
+
+.store-rank .table-wrap .table-list {
+  padding: 30px 10px;
+  line-height: 150%;
+}
+
+.store-rank .table-wrap .table-list--category {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  font-family:'Pretendard', sans-serif;
+  border-bottom: 1px solid #121212;
+}
+
+.store-rank .table-wrap .table-list--category .table-list--rank { width: 5%; }
+.store-rank .table-wrap .table-list--category .table-list--name { width: 10%; }
+.store-rank .table-wrap .table-list--category .table-list--location { width: 15%; }
+.store-rank .table-wrap .table-list--category .table-list--tel { width: 10%; }
+.store-rank .table-wrap .table-list--category .table-list--distinct { width: 10%; }
+.store-rank .table-wrap .table-list--category .table-list--more { width: 10%; }
+.store-rank .table-wrap .table-list--category .table-list--recommend { width: 10%; }
+.store-rank .table-wrap .table-list--category .table-list--review { width: 30%; }
+
+.store-rank .table-wrap .table-list--content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  font-family:'Pretendard', sans-serif;
+  font-weight: 400;
+  border-bottom: 1px solid #ddd;
+}
+
+.store-rank .table-wrap .table-list--content:hover {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+}
+.store-rank .table-wrap .table-list--content .table-list--rank { width: 5%; }
+.store-rank .table-wrap .table-list--content .table-list--name { width: 10%; }
+
+.store-rank .table-wrap .table-list--content .table-list--name p {
+  padding: 4px 20px;
+  color: red;
+  border: 1px solid red;
+  display: inline-block;
+  background-color: #fff;
+  font-weight: 500;
+  border-radius: 600px;
+  font-size: 14px;
+  font-family:'Pretendard', sans-serif;
+}
+
+.store-rank .table-wrap .table-list--content .table-list--location { width: 15%; }
+.store-rank .table-wrap .table-list--content .table-list--tel { width: 10%; }
+.store-rank .table-wrap .table-list--content .table-list--distinct { width: 10%; }
+.store-rank .table-wrap .table-list--content .view-more-btn { width: 10%; }
+.store-rank .table-wrap .table-list--content .table-list--recommend { width: 10%; }
+.store-rank .table-wrap .table-list--content .table-list--review {
+  width: 30%;
+}
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
@@ -359,7 +556,7 @@ section {
 
   .navbar>ul>li {
     white-space: nowrap;
-    padding: 10px 0 10px 28px;
+    padding: 10px 28px 10px 28px;
   }
 
   .navbar a,

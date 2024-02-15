@@ -1,7 +1,7 @@
 from django.shortcuts import render
 import numpy as np
 import pandas as pd
-from deep_app.modules.data_anal import image_classify
+from deep_app.modules.data_anal import image_classify, get_res_map
 from django.core.files.storage import FileSystemStorage
 from operator import itemgetter
 from .models import *
@@ -12,9 +12,6 @@ import base64
 
 def input_image(request):
     return render(request, 'deep_app/input_image.html')
-
-def result(request):
-    return render(request, 'deep_app/result.html')
 
 def file_upload(request) :
     if request.method == "POST" :
@@ -58,19 +55,32 @@ def file_upload(request) :
 
         # 상위 5개 음식점의 정보 추출
         rank5_info_list = []
-        for res_value, count_sum in top_5_res:
-            restaurant_info_instance = RestaurantInfo.objects.get(id=res_value.id)
+        for rank, (res_value, count_sum) in enumerate(top_5_res, start=1):
+            restaurant_info_instance = res_value
             visitor_review_instance = VisitorReview.objects.get(id=restaurant_info_instance.id)
 
+            rank_review_instances = RankReview.objects.filter(res=restaurant_info_instance)
+            
+            code_texts = []
+            cnt_values = []
+
+            for rank_review_instance in rank_review_instances:
+                code_text = Codezip.objects.get(code=rank_review_instance.code.code).text
+                code_texts.append(code_text)
+                cnt_values.append(rank_review_instance.cnt)
+
             rank5_info_list.append({
-                'addr' : restaurant_info_instance.addr,
-                'store_name' : restaurant_info_instance.store_name,
-                'tel' : restaurant_info_instance.tel,
-                're_visitor' : visitor_review_instance.re_visitor,
-                'x' : restaurant_info_instance.x,
-                'y' : restaurant_info_instance.y,
-            }
-            )
+                'rank': rank,  # 순위 추가
+                'addr': restaurant_info_instance.addr,
+                'store_name': restaurant_info_instance.store_name,
+                'tel': restaurant_info_instance.tel,
+                're_visitor': visitor_review_instance.re_visitor,
+                'x': restaurant_info_instance.x,
+                'y': restaurant_info_instance.y,
+                'code_texts': code_texts,
+                'cnt_values': cnt_values,
+                'cnt_tot': count_sum
+            })
 
         context = { # 클라이언트 페이지에 전달된 dic(이미지 분류명, 이미지 파일명)
             'class_name' : class_name,
@@ -83,3 +93,20 @@ def file_upload(request) :
         }
         
     return render(request, 'deep_app/result.html', context)
+
+def food_map_form(request) :
+    food_name_list = []
+    food_info_instance = FoodInfoWithTaboo.objects.all()
+
+    for food_info in food_info_instance:
+        food = food_info.food
+        food_name_list.append(food)
+
+    food_name_list = sorted(food_name_list)
+    return render(request, 'deep_app/food_map_form.html', {'food_name_list' : food_name_list})
+
+def show_res_map(request) :
+    if request.method == 'POST' :
+        food_name = request.POST['food_name']
+        smap = get_res_map(food_name)
+    return render(request, 'deep_app/res_map_result.html', {'smap' : smap})

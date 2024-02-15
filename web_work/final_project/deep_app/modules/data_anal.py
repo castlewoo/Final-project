@@ -6,8 +6,47 @@ from PIL import Image
 import numpy as np
 from keras.models import load_model
 import folium
+from deep_app.models import *
 import json
+import os
 
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+def get_res_map(food_name): # 호출시 전달된 서울시 자치구에 대한 지도 시각화 하는 함수
+    food_info = FoodInfoWithTaboo.objects.get(food=food_name)
+    restaurant_instances = RestaurantInfo.objects.filter(food=food_info)
+
+    restaurnat_info_list = []
+
+    for restaurant_instance in restaurant_instances:
+        restaurant_info_dict = {
+            'store_name' : restaurant_instance.store_name,
+            'addr' : restaurant_instance.addr,
+            'tel' : restaurant_instance.tel,
+            'x' : restaurant_instance.x,
+            'y' : restaurant_instance.y
+        }
+        restaurnat_info_list.append(restaurant_info_dict)
+
+    smap = folium.Map(location=[37.5502, 126.982], zoom_start=11) # 기준 지도 생성
+
+    for restaurant_info in restaurnat_info_list:
+        latitude = restaurant_info['y']  # 레스토랑의 위도
+        longitude = restaurant_info['x']  # 레스토랑의 경도
+        store_name = restaurant_info['store_name']  # 레스토랑 이름
+        addr = restaurant_info['addr']  # 레스토랑 주소
+        tel = restaurant_info['tel']  # 레스토랑 전화번호
+
+        popup_html = f"<b>{store_name}</b><br>주소: {addr}<br>전화번호: {tel}"
+
+        # 마커 추가
+        folium.Marker(
+            location=[latitude, longitude], 
+            popup=folium.Popup(popup_html, max_width=300), 
+            tooltip=store_name
+            ).add_to(smap)
+
+    return smap._repr_html_() # html코드를 추출 후 반환, folium 객체가 아닌 html 코드가 반환됨
 
 # 한 개의 이미지에 대해 분류 예측 후 분류 카테고리를 반환하는 함수
 def image_classify(file):
